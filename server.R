@@ -37,7 +37,7 @@ server <- function(input, output) {
     usgs.sheldon %>%
       filter(datetime >= input$timestamp[1],
              datetime <= input$timestamp[2]
-)
+      )
   })
   
   kolthoff <- reactive({ 
@@ -81,11 +81,18 @@ server <- function(input, output) {
       ggtitle("NOAA Precip (cm)")
     
     grid.newpage()
-    plot.all <- grid.draw(rbind(ggplotGrob(p1), ggplotGrob(p2), ggplotGrob(p3), ggplotGrob(p4), size = "last"))
+    plot.all <- grid.draw(rbind(ggplotGrob(p1), ggplotGrob(p2), ggplotGrob(p3), size = "last"))
     
     print(plot.all)
-    })
+    
+    if(input$precip) {
+      plot.all <- grid.draw(rbind(ggplotGrob(p1), ggplotGrob(p2), ggplotGrob(p3), ggplotGrob(p4), size = "last"))
+      
+      print(plot.all)
+    }
+  })
   
 }
+
 
 
