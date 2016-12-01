@@ -9,9 +9,7 @@ library(dplyr)
 library(shinyTime)
 library(grid)
 
-drv <- dbDriver("PostgreSQL")
-conn <- dbConnect(drv, host="10.0.0.27", port="5432",
-                  dbname="NR_monitoring", user="jreinier", password="carex91308")
+# connect to datasource
 
 hydrodata <- dbGetQuery(conn, "SELECT date, timestamp, reserv, level_cm, serial FROM nr_misc.water_level_data WHERE reserv = 'big creek' AND level_raw < 9.15;")
 
